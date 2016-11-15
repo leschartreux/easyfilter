@@ -1,4 +1,9 @@
-wget https://www.google.com/supported_domains
+#!/bin/bash
+bind_dir="/usr/share/easyfilter/bind-filter"
+
+if [ ! -f supported_comains ]; then
+	wget https://www.google.com/supported_domains
+fi
 
 echo ";safesearch for google" > safesearch.conf
 for i in `cat supported_domains`
@@ -23,4 +28,5 @@ echo >> safesearch.conf
 echo ";safesearch for Bing" >> safesearch.conf
 echo "www.bing.com CNAME strict.bing.com." >> safesearch.conf
 
+cp safesearch.conf $bind_dir
     

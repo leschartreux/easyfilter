@@ -33,4 +33,11 @@ do
 
 done
 
+if [ -f $bind_dir/safesearch.conf ]
+then
+	echo "\$INCLUDE $bind_dir/safesearch.conf" >> $zone_file
+fi
+
+chown bind:bind $zone_file
+chown -R bind:bind $bind_dir
 

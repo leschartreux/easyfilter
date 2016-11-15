@@ -17,10 +17,10 @@ done
 
 echo >> safesearch.conf
 echo ";safe search for Qwant" >> safesearch.conf
-echo "api.qwant.com. CNAME safeapi.qwant.com." >> safesearch.conf
+echo "api.qwant.com CNAME safeapi.qwant.com." >> safesearch.conf
 
 echo >> safesearch.conf
 echo ";safesearch for Bing" >> safesearch.conf
-echo "www.bin.com. CNAME strict.bing.com." >> safesearch.conf
+echo "www.bing.com CNAME strict.bing.com." >> safesearch.conf
 
     

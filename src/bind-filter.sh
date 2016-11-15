@@ -1,3 +1,4 @@
+#!/bin/bash
 #build RPZ zone with bl enabled categories
 tmpdir="/tmp/blacklists"
 blfile="$tmpdir/blacklists.tar.gz"
@@ -17,15 +18,16 @@ function make_categ {
 	mv $FILE_tmp $bind_dir/$1.conf
 }
 
+
+cd $tmpdir
+tar xzf $blfile
+. $conf_file
+
 echo "\$TTL 1D" >  $zone_file
 echo "@	SOA	easyfilter.localdomain.org.	root.localdomain.org ( 1 2h 3m 30d 1h)" >> $zone_file
 echo "	NS easyfilter.localdomain.org." >> $zone_file
 echo "easyfilter.localdomain.org. IN $PRIVATE_IP" >> $zone_file
 echo "" >> $zone_file
-
-cd $tmpdir
-tar xzf $blfile
-. $conf_file
 
 for categ in `cat $bl_categories_enabled`;
 do

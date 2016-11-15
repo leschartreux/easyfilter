@@ -10,7 +10,7 @@ SED="sed -i"
 bind_dir="/usr/share/easyfilter/bind-filter"
 
 echo "\$TTL 1D" >  $zone_file
-echo "@	SOA	easyfilter.leschartreux.org.	root.leschartreux.org ( 1 2h 3m 30d 1h)" >> $zone_file
+echo "@	SOA	easyfilter.localdomain.org.	root.localdomain.org ( 1 2h 3m 30d 1h)" >> $zone_file
 echo "	NS easyfilter.leschartreux.org." >> $zone_file
 
 cd $tmpdir

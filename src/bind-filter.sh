@@ -11,7 +11,9 @@ bind_dir="/usr/share/easyfilter/bind-filter"
 
 echo "\$TTL 1D" >  $zone_file
 echo "@	SOA	easyfilter.localdomain.org.	root.localdomain.org ( 1 2h 3m 30d 1h)" >> $zone_file
-echo "	NS easyfilter.leschartreux.org." >> $zone_file
+echo "	NS easyfilter.localdomain.org." >> $zone_file
+echo "easyfilter.localdomain.org. IN $PRIVATE_IP" >> $zone_file
+echo "" >> $zone_file
 
 cd $tmpdir
 tar xzf $blfile

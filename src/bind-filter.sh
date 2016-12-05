@@ -19,6 +19,10 @@ function make_categ {
 }
 
 
+if [ ! -d $bind_dir ]; then
+	mkdir -p $bind_dir
+fi
+
 cd $tmpdir
 tar xzf $blfile
 . $conf_file

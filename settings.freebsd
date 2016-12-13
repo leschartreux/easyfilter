@@ -1,0 +1,35 @@
+#package settings
+NAMED="/usr/local/sbin/named"
+INSTALLDIR="/usr/local/share/easyfilter"
+CONFDIR="/usr/local/etc/easyfilter"
+BIND_REDIR="$CONFDIR/bind-filter.conf"
+CONF_FILE="$CONFDIR/bind-filter.conf"
+BLTMPDIR="/tmp/blacklists"
+BLFILE="$BLTMPDIR/blacklists.tar.gz"
+BLCATEGORIES="$CONFDIR/bl-categories"
+BLCATEGORIES_E="$CONFDIR/bl-categories-enabled"
+
+SAFESEARCH_ENABLED="$CONFDIR/safesearch-enabled"
+SEARCHENGINE_LIST="$CONFDIR/searchengines.conf"
+YOUTUBE_DOMAINS="$CONFDIR/youtube_domains.conf"
+GOOGLE_DOMAINS_TMP="$BLTMPDIR/supported_domains"
+BIND_SAFESEARCH_TMP="$BLTMPDIR/safesearch.conf"
+
+
+SED="sed -i.back"
+CR="
+"
+
+FILE_TMP="$BLTMPDIR/categ.conf"
+TMPCATEG="$BLTMPDIR/categories.chk"
+TMPCATEG_CHECKED="$BLTMPDIR/categ_checked"
+TMPSE_CHECKED="$BLTMPDIR/se_checked"
+
+#bind settings
+BIND_ROOT="/cf/named"
+ZONE_FILE="/etc/namedb/master/easyfilter.db"
+BIND_DIR="/var/easyfilter/bind-filter"
+BIND_SAFESEARCH="$BIND_DIR/_safesearch.conf"
+
+
+BL_SERVER="dsi.ut-capitole.fr"

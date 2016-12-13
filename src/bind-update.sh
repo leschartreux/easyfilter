@@ -1,20 +1,26 @@
-BLDIR="/tmp/blacklists/"
-TMPCATEG="$BLDIR/categories.chk"
-CONFDIR="/etc/easyfilter"
-BLCATEGORIES="$CONFDIR/bl-categories"
-BLCATEGORIES_E="$CONFDIR/bl-categories-enabled"
+#!/bin/sh
+CONFDIR="/usr/local/etc/easyfilter"
+. "$CONFDIR/settings.freebsd"
+echo confid=$CONFDIR $BLTMPDIR
 
-function get_categ()
+download_bl()	
+{	
+	mkdir $BLTMPDIR
+	curl -o $BLTMPDIR/blacklists.tar.gz http://$BL_SERVER/blacklists/download/blacklists.tar.gz 
+	md5 $BLTMPDIR/blacklists.tar.gz | cut -d" " -f4 > $BLTMPDIR/md5sum
+}		
+
+get_categ()
 {
 
 	curdir=$1
-	cd /tmp/blacklists/
+	cd $BLTMPDIR
 	tar xzf blacklists.tar.gz
 	cat /dev/null > $TMPCATEG
 	cat /dev/null > $BLCATEGORIES
-	for f in `ls $BLDIR/blacklists`
+	for f in `ls blacklists`
 	do
-		if [ -d $BLDIR/blacklists/$f ]; then
+		if [ -d blacklists/$f ]; then
 			
 			n=$(basename $f)
 			#rewrite categories list
@@ -33,12 +39,29 @@ function get_categ()
 	done
 	cd $curdir
 	cat $TMPCATEG
-} 	
+}
+
+get_sl()
+{
+	cat /dev/null > $TMPCATEG
+	while read l
+	do
+		se=`echo $l | cut -d" " -f1`
+		grep $se $SAFESEARCH_ENABLED >/dev/null 2>&1
+		if [ $? -eq 0 ]
+		then
+			echo -n "$l on " >> $TMPCATEG
+		else
+			echo -n "$l off " >> $TMPCATEG
+		fi
+	done < $SEARCHENGINE_LIST 
+	cat $TMPCATEG
+}
 
 echo "Downloading categories...."
 cd $INSTALLDIR
-if [ ! -f /tmp/blacklists/blacklists.tar.gz ]; then
-	./dnsmasq-filter.sh  --download
+if [ ! -f $BLTMPDIR/blacklists.tar.gz ]; then
+	download_bl
 fi
 echo "OK"
 
@@ -48,10 +71,22 @@ dir=`pwd`
 CATEG=$(get_categ $dir)
 echo $CATEG
 
- BL=$(whiptail --checklist "Please choose categories to filter :" 20 78 13 $CATEG 3>&1 1>&2 2>&3)
+ dialog --no-cancel --checklist "Please choose categories to filter :" 20 78 13 $CATEG 2>  $TMPCATEG_CHECKED
  cat /dev/null > $BLCATEGORIES_E
- for b in $BL
+ for b in `cat $TMPCATEG_CHECKED`
  do
- 	sed -e 's/^"//' -e 's/"$//' <<<"$b" >> $BLCATEGORIES_E
+ 	echo $b | sed -e 's/^"//' -e 's/"$//'  >> $BLCATEGORIES_E
  done
+ 
+ 
+echo "***************************************************************************"
+echo "Build safesearch engines list"
+SLL=$(get_sl)
+
+dialog --no-cancel --checklist "Please choose search engines :" 20 75 10 $SLL 2>$TMPSE_CHECKED 
+cat /dev/null > $SAFESEARCH_ENABLED
+for b in `cat $TMPSE_CHECKED`
+do
+ 	echo $b | sed -e 's/^"//' -e 's/"$//'  >> $SAFESEARCH_ENABLED
+done
  

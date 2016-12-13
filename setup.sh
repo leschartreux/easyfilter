@@ -1,15 +1,8 @@
-#!/bin/bash
-
+#!/bin/sh
+. settings.freebsd
 #bind command
-NAMED="/usr/sbin/named"
-INSTALLDIR="/usr/local/easyfilter"
-CONFDIR="/etc/easyfilter"
-BIND_REDIR="$CONFDIR/bind-filter.conf"
-
-
-	
-	
-function do_setup
+		
+do_setup()
 {
 	mkdir -p $INSTALLDIR
 	mkdir $CONFDIR
@@ -18,12 +11,14 @@ function do_setup
 	echo "copying files"
 	cp src/* $INSTALLDIR
 	cp src/etc/*.conf $CONFDIR
+	cp settings.freebsd $CONFDIR
 	echo "OK"
 	echo
 	echo "We need a host IP to redirect blacklisted site to"
 	echo "Typically a web server with a simple index.html file on root directory which will be displayed on each hit"
    	read -p "What is the IP to redirect balcklisted hosts ?" priv_ip
    	echo "PRIVATE_IP=$priv_ip" > $BIND_REDIR
+   	echo "CNAME_REDIR=easyfilter.safedomain.org" >> $BIND_REDIR
    	echo OK
    	
    	echo "**********************************************"
@@ -31,14 +26,14 @@ function do_setup
    	
 }
 
-if [ $EUID -ne 0 ]; then
+if [ $USER != "root" ]; then
 	echo "You must be root to setup"
 	exit 1
 fi
 
 if [ ! -x $NAMED ]; then
 	echo "bind is not installed."
-	echo "try apt-get instal bind9 before"
+	echo "try apt-get instal bind9 before for pfSense use"
 	exit 1
 fi
 

@@ -9,7 +9,7 @@ make_categ() {
 	$SED "/^#.*/d" $FILE_TMP
 	$SED "s/^\.//g" $FILE_TMP
 	$SED "s/^\*\.\./*./g" $FILE_TMP
-	$SED "s?.*?& CNAME $CNAME_REDIR \\${CR}*.& CNAME $CNAME_REDIR?g" $FILE_TMP
+	$SED "s?.*?& A $PRIVATE_IP \\${CR}*.& A $PRIVATE_IP?g" $FILE_TMP
 	mv $FILE_TMP $BIND_ROOT$BIND_DIR/$1.conf
 }
 
@@ -29,11 +29,11 @@ fi
 
 
 echo "\$TTL 1D" >  $DB_FILE
-echo "@	SOA	easyfilter.localdomain.org.	root.localdomain.org ( 1 2h 3m 30d 1h)" >>  $DB_FILE
-echo "	NS easyfilter.localdomain.org." >>  $DB_FILE
-echo "easyfilter.localdomain.org. IN A $PRIVATE_IP" >>  $DB_FILE
+echo "@	SOA	easyfilter.local.	root.easyfilter.local ( 1 2h 3m 30d 1h)" >>  $DB_FILE
+echo "	NS easyfilter.local." >>  $DB_FILE
+echo "easyfilter.local. IN A $PRIVATE_IP" >>  $DB_FILE
 echo "" >>  $DB_FILE
-echo "$CNAME_REDIR A $PRIVATE_IP" >> DB_FILE
+echo "$CNAME_REDIR A $PRIVATE_IP" >> $DB_FILE
 
 for categ in `cat $BLCATEGORIES_E`;
 do

@@ -10,7 +10,10 @@ do_setup()
 	echo "***********************************************"
 	echo "copying files"
 	cp src/* $INSTALLDIR
+	cp -R src/www $INSTALLDIR
 	cp src/etc/*.conf $CONFDIR
+	cp src/rc.d/nginx_easyfilter.sh $RCDIR
+	chmod u+x $RCDIR/nginx_easyfilter.sh
 	cp settings.freebsd $CONFDIR
 	echo "OK"
 	echo
@@ -18,7 +21,7 @@ do_setup()
 	echo "Typically a web server with a simple index.html file on root directory which will be displayed on each hit"
    	read -p "What is the IP to redirect balcklisted hosts ?" priv_ip
    	echo "PRIVATE_IP=$priv_ip" > $BIND_REDIR
-   	echo "CNAME_REDIR=easyfilter.safedomain.org" >> $BIND_REDIR
+   	echo "CNAME_REDIR=redir.local" >> $BIND_REDIR
    	echo OK
    	
    	echo "**********************************************"

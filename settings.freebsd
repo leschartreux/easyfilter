@@ -2,6 +2,7 @@
 NAMED="/usr/local/sbin/named"
 INSTALLDIR="/usr/local/share/easyfilter"
 CONFDIR="/usr/local/etc/easyfilter"
+RCDIR="/usr/local/etc/rc.d"
 BIND_REDIR="$CONFDIR/bind-filter.conf"
 CONF_FILE="$CONFDIR/bind-filter.conf"
 BLTMPDIR="/tmp/blacklists"

@@ -50,7 +50,8 @@ duckduckgo)
 yahoo)
 	echo >>$BIND_SAFESEARCH_TMP
 	echo ";block yahoo searchsite" >> $BIND_SAFESEARCH_TMP
-	echo "search.yahoo.com CNAME $CNAME_REDIR." >> $BIND_SAFESEARCH_TMP
+	echo "search.yahoo.com IN A $PRIVATE_IP" >> $BIND_SAFESEARCH_TMP
+	echo "*.search.yahoo.com IN A $PRIVATE_IP" >> $BIND_SAFESEARCH_TMP
 	;;
 
 esac

@@ -27,7 +27,7 @@ check categories and search engines you want to filter
 
 5) modify your named config :
 
-add in general custom options
+add in general custom option
 
 check-names response ignore;
 response-policy { zone "easyfilter.local"; };

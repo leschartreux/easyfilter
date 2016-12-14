@@ -21,19 +21,21 @@ get_categ()
 	for f in `ls blacklists`
 	do
 		if [ -d blacklists/$f ]; then
-			
-			n=$(basename $f)
-			#rewrite categories list
-			echo $n >> $BLCATEGORIES
-			#pepare checkbox doialog.
-			#pre_check already selected categories from previous launch
-			grep $n $BLCATEGORIES_E >/dev/null 2>&1
-			if [ $? -eq 0 ]
-			then
-				#echo "$n trouver"
-				echo -n " $n $n on" >> $TMPCATEG
-			else
-				echo -n " $n $n off" >> $TMPCATEG
+			#ignore symlinks
+			if [ ! -L blacklists/$f ]; then
+				n=$(basename $f)
+				#rewrite categories list
+				echo $n >> $BLCATEGORIES
+				#pepare checkbox doialog.
+				#pre_check already selected categories from previous launch
+				grep $n $BLCATEGORIES_E >/dev/null 2>&1
+				if [ $? -eq 0 ]
+				then
+					#echo "$n trouver"
+					echo -n " $n $n on" >> $TMPCATEG
+				else
+					echo -n " $n $n off" >> $TMPCATEG
+				fi
 			fi
 		fi
 	done

@@ -12,8 +12,6 @@ do_setup()
 	cp src/* $INSTALLDIR
 	cp -R src/www $INSTALLDIR
 	cp src/etc/*.conf $CONFDIR
-	cp src/rc.d/nginx_easyfilter.sh $RCDIR
-	chmod u+x $RCDIR/nginx_easyfilter.sh
 	cp settings.freebsd $CONFDIR
 	echo "OK"
 	echo
@@ -25,6 +23,21 @@ do_setup()
    	echo OK
    	
    	echo "**********************************************"
+ 	
+	 while true; do
+	    read -p "Do you wish to start dedicated web server on boot (you need to change webconfigurator default port)  ?" yn
+	    case $yn in
+	        [Yy]* ) 
+	        	cp src/rc.d/nginx_easyfilter.sh $RCDIR
+				chmod u+x $RCDIR/nginx_easyfilter.sh;;
+	        [Nn]* )
+	        	if [ -x $RCDIR/nginx_easyfilter.sh ]; then
+	        		rm $RCDIR/nginx_easyfilter.sh
+	        	fi
+	        	exit;;
+	        * ) echo "Please answer yes or no.";;
+	    esac
+	done
  
    	
 }

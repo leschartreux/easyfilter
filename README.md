@@ -25,10 +25,9 @@ check categories and search engines you want to filter
 
 4) launch bind-build.sh in INSTALLDIR
 
-5)
-modify your named config :
+5) modify your named config :
 
-add in general custom options
+add in general custom option
 
 check-names response ignore;
 response-policy { zone "easyfilter.local"; };

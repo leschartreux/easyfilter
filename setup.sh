@@ -4,8 +4,10 @@
 
 
 if [ -f /etc/platform ]; then
+	echo "PFSENSE detected"
 	cp settings.freebsd settings
-elif [ -f /etc/debina_version ]; then
+elif [ -f /etc/debian_version ]; then
+	echo "Debian detected"
  	cp settings.debian settings
 else
 	echo "None compatible system detected (debian or pfsense)"

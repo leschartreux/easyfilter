@@ -1,7 +1,7 @@
 #!/bin/sh
 #build RPZ zone with bl enabled categories
-CONFDIR="/usr/local/etc/easyfilter"
-. $CONFDIR/settings.freebsd
+CONFDIR="/etc/easyfilter"
+. $CONFDIR/settings
 
 make_categ() {
 	egrep  -v "^([0-9]{1,3}\.){3}[0-9]{1,3}$" blacklists/$1/domains > $FILE_TMP

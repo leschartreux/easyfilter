@@ -1,5 +1,5 @@
 #!/bin/sh
-CONFDIR="/usr/local/etc/easyfilter"
+CONFDIR="/etc/easyfilter"
 . "$CONFDIR/settings.freebsd"
 echo confid=$CONFDIR $BLTMPDIR
 

@@ -1,6 +1,23 @@
 #!/bin/bash
-. settings.debian
+
+
+
+
+if [ -f /etc/platform ]; then
+	cp settings.freebsd settings
+elif [ -f /etc/debina_version ]; then
+ 	cp settings.debian settings
+else
+	echo "None compatible system detected (debian or pfsense)"
+	echo "abort."
+	exit 1
+fi
+
+. settings
+
 #bind command
+
+
 		
 do_setup()
 {
@@ -12,7 +29,7 @@ do_setup()
 	cp src/* $INSTALLDIR
 	cp -R src/www $INSTALLDIR
 	cp src/etc/*.conf $CONFDIR
-	cp settings.freebsd $CONFDIR
+	cp settings $CONFDIR
 	echo "OK"
 	echo
 	echo "We need a host IP to redirect blacklisted site to"
@@ -24,21 +41,22 @@ do_setup()
    	
    	echo "**********************************************"
  	
-	 while true; do
-	    read -p "Do you wish to start dedicated web server on boot (you need to change webconfigurator default port)  ?" yn
-	    case $yn in
-	        [Yy]* ) 
-	        	cp src/rc.d/nginx_easyfilter.sh $RCDIR
-				chmod u+x $RCDIR/nginx_easyfilter.sh;;
-	        [Nn]* )
-	        	if [ -x $RCDIR/nginx_easyfilter.sh ]; then
-	        		rm $RCDIR/nginx_easyfilter.sh
-	        	fi
-	        	exit;;
-	        * ) echo "Please answer yes or no.";;
-	    esac
-	done
- 
+	if [ -f /etc/platform ]; then
+		while true; do
+		    read -p "Do you wish to start dedicated web server on boot (you need to change webconfigurator default port)  ?" yn
+		    case $yn in
+		        [Yy]* ) 
+		        	cp src/rc.d/nginx_easyfilter.sh $RCDIR
+					chmod u+x $RCDIR/nginx_easyfilter.sh;;
+		        [Nn]* )
+		        	if [ -x $RCDIR/nginx_easyfilter.sh ]; then
+		        		rm $RCDIR/nginx_easyfilter.sh
+		        	fi
+		        	exit;;
+		        * ) echo "Please answer yes or no.";;
+		    esac
+		done
+	fi
    	
 }
 

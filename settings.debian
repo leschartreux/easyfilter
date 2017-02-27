@@ -17,7 +17,7 @@ GOOGLE_DOMAINS_TMP="$BLTMPDIR/supported_domains"
 BIND_SAFESEARCH_TMP="$BLTMPDIR/safesearch.conf"
 
 
-SED="sed -e"
+SED="sed -i"
 CR="
 "
 

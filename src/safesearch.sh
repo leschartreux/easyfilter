@@ -1,6 +1,6 @@
 #!/bin/sh
-CONFDIR="/usr/local/etc/easyfilter"
-. $CONFDIR/settings.freebsd
+CONFDIR="/etc/easyfilter"
+. $CONFDIR/settings
 . $BIND_REDIR
 
 

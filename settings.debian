@@ -21,6 +21,8 @@ SED="sed -i"
 CR="
 "
 
+DIALOG="/usr/bin/dialog"
+
 FILE_TMP="$BLTMPDIR/categ.conf"
 TMPCATEG="$BLTMPDIR/categories.chk"
 TMPCATEG_CHECKED="$BLTMPDIR/categ_checked"

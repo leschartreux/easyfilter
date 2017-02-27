@@ -27,7 +27,7 @@ TMPCATEG_CHECKED="$BLTMPDIR/categ_checked"
 TMPSE_CHECKED="$BLTMPDIR/se_checked"
 
 #bind settings
-BIND_ROOT="/etc/bind"
+BIND_ROOT="/"
 ZONE_FILE="/var/cache/bind/easyfilter.db"
 BIND_DIR="/var/lib/easyfilter/bind-filter"
 BIND_SAFESEARCH="$BIND_DIR/_safesearch.conf"

@@ -1,6 +1,6 @@
 #!/bin/sh
 CONFDIR="/etc/easyfilter"
-. "$CONFDIR/settings.freebsd"
+. "$CONFDIR/settings"
 echo confid=$CONFDIR $BLTMPDIR
 
 download_bl()	

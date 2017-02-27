@@ -1,5 +1,5 @@
-#!/bin/sh
-. settings.freebsd
+#!/bin/bash
+. settings.debian
 #bind command
 		
 do_setup()

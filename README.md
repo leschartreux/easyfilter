@@ -31,9 +31,11 @@ add this code in general custom option pfsense's bind package ui. For Debian mod
 ```
 check-names response ignore;
 response-policy { zone "easyfilter.local"; };
+```
+pfsense : Decalre this zone in your view's custom settings.
+Debian : add this in `/etc/bind/named.conf.local`
 
-decalre zone in your view's custom settings
-
+```
 zone "easyfilter.local" {
    type master;
    file "easyfilter.db";

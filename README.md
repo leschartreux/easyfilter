@@ -26,7 +26,7 @@ check categories and search engines you want to filter
 
 5) modify your named config :
 
-add in general custom option pfsense bind package ui or for Debian modify file `/etc/bind9/named.conf.options`
+add this code in general custom option pfsense's bind package ui. For Debian modify file `/etc/bind9/named.conf.options`
 
 ```
 check-names response ignore;

@@ -11,7 +11,8 @@ It also adds safesearch capabilities for most popluar search engines. (Unless ya
 Bind from ISC is the server I prefer. it consumes much less CPU than dnsmasq.
 for adult (porn) filter (the biggest category), your server need at least 2Gb of RAM.
 
-1) verify settings variables suit your distro 
+1) verify settings variables suit your distro.
+pfsense needs bind9 package. For Debian : `apt-get install bind9`
 
 2) launch setup.sh
 It needs an IP to redirect bad content to.
@@ -25,7 +26,7 @@ check categories and search engines you want to filter
 
 5) modify your named config :
 
-add in general custom option
+add in general custom option pfsense bind package ui or for Debian modify file `/etc/bind9/named.conf.options`
 
 ```
 check-names response ignore;

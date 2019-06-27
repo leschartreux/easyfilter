@@ -9,6 +9,7 @@ if [ -f /etc/platform ]; then
 elif [ -f /etc/debian_version ]; then
 	echo "Debian detected"
  	cp settings.debian settings
+ 	apt install dialog
 else
 	echo "None compatible system detected (debian or pfsense)"
 	echo "abort."
